@@ -23,3 +23,14 @@ class TestSimpleBST(unittest.TestCase):
         # bst.insert(6)
         # bst.inorder_walk()
         pass
+
+    def test_find(self):
+        bst = BST()
+        find_key = 14
+        bst.insert(find_key)
+        bst.insert(4)
+        bst.insert(23)
+        with self.subTest("check positive case"):
+            self.assertIsNotNone(bst.find(find_key))
+        with self.subTest("check negative case"):
+            self.assertIsNone(bst.find(10000))

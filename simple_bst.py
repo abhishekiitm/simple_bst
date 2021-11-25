@@ -50,3 +50,13 @@ class BST():
                 print(curr_node.key)
                 curr_node = curr_node.right
             
+    def find(self, key):
+        curr_node = self.root
+        while curr_node:
+            if key == curr_node.key :
+                return curr_node
+            if key <= curr_node.key:
+                curr_node = curr_node.left
+            else:
+                curr_node = curr_node.right
+        return None
