@@ -34,3 +34,23 @@ class TestSimpleBST(unittest.TestCase):
             self.assertIsNotNone(bst.find(find_key))
         with self.subTest("check negative case"):
             self.assertIsNone(bst.find(10000))
+
+    def test_is_empty(self):
+        bst_empty = BST()
+        bst_non_empty = BST()
+        bst_non_empty.insert(10)
+        with self.subTest("check non empty case"):
+            self.assertEqual(bst_non_empty.is_empty(), False)
+        with self.subTest("check empty case"):
+            self.assertEqual(bst_empty.is_empty(), True)
+
+    def test_min_max(self):
+        bst = BST()
+        elems = [1, 2, 3, 4, 5]
+        for elem in elems:
+            bst.insert(elem)
+
+        with self.subTest("check maximum"):
+            self.assertEqual(bst.max(), max(elems))
+        with self.subTest("check minimum"):
+            self.assertEqual(bst.min(), min(elems))

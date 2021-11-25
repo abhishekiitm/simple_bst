@@ -36,8 +36,8 @@ class BST():
             prev_node.right = TreeNode(key, parent=prev_node)
 
     def inorder_walk(self):
+        if self.is_empty(): return None
         curr_node = self.root
-        if not curr_node: return
 
         stack = []
 
@@ -60,3 +60,20 @@ class BST():
             else:
                 curr_node = curr_node.right
         return None
+
+    def is_empty(self):
+        return not self.root
+    
+    def min(self):
+        if self.is_empty(): return None
+        curr_node = self.root
+        while curr_node.left:
+            curr_node = curr_node.left
+        return curr_node.key
+
+    def max(self):
+        if self.is_empty(): return None
+        curr_node = self.root
+        while curr_node.right:
+            curr_node = curr_node.right
+        return curr_node.key
