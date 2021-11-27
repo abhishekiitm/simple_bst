@@ -62,3 +62,32 @@ class TestSimpleBST(unittest.TestCase):
             self.assertEqual(bst._max_node().key, max(elems))
         with self.subTest("check minimum"):
             self.assertEqual(bst._min_node().key, min(elems))
+
+    def test_get_successor_node(self):
+        bst = BST()
+        elems = [14, 4, 7, 1, 10, 6]
+        for elem in elems:
+            bst.insert(elem)
+        sorted_elems = sorted(elems)
+        for idx in range(len(sorted_elems)-1):
+            node = bst.find(sorted_elems[idx])
+            successor_node = bst.get_successor_node(node)
+            self.assertEqual(sorted_elems[idx+1], successor_node.key)
+        node = bst.find(sorted_elems[-1])
+        successor_node = bst.get_successor_node(node)
+        self.assertIsNone(successor_node)
+        
+    def test_get_predecessor_node(self):
+        bst = BST()
+        elems = [14, 4, 7, 1, 10, 6]
+        for elem in elems:
+            bst.insert(elem)
+        sorted_elems = sorted(elems)
+        sorted_elems.reverse()
+        for idx in range(len(sorted_elems)-1):
+            node = bst.find(sorted_elems[idx])
+            predecessor_node = bst.get_predecessor_node(node)
+            self.assertEqual(sorted_elems[idx+1], predecessor_node.key)
+        node = bst.find(sorted_elems[-1])
+        predecessor_node = bst.get_predecessor_node(node)
+        self.assertIsNone(predecessor_node)
