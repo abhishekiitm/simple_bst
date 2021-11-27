@@ -54,3 +54,14 @@ class TestSimpleBST(unittest.TestCase):
             self.assertEqual(bst.max(), max(elems))
         with self.subTest("check minimum"):
             self.assertEqual(bst.min(), min(elems))
+
+    def test__min_max_node(self):
+        bst = BST()
+        elems = [1, 2, 3, 4, 5]
+        for elem in elems:
+            bst.insert(elem)
+
+        with self.subTest("check maximum"):
+            self.assertEqual(bst._max_node().key, max(elems))
+        with self.subTest("check minimum"):
+            self.assertEqual(bst._min_node().key, min(elems))
