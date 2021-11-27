@@ -78,16 +78,48 @@ class BST():
             curr_node = curr_node.right
         return curr_node.key
 
-    def _min_node(self):
+    def _min_node(self, curr_node = None):
+        """
+        returns the minimum node of the subtree rooted at curr_node 
+        """
         if self.is_empty(): return None
-        curr_node = self.root
+        if curr_node is None: curr_node = self.root
         while curr_node.left:
             curr_node = curr_node.left
         return curr_node
 
-    def _max_node(self):
+    def _max_node(self, curr_node = None):
+        """
+        returns the minimum node of the subtree rooted at curr_node 
+        """
         if self.is_empty(): return None
-        curr_node = self.root
+        if curr_node is None: curr_node = self.root
         while curr_node.right:
             curr_node = curr_node.right
         return curr_node
+
+    def get_successor_node(self, node):
+        """
+        returns a node with the smallest key greater than the key of the node
+        returns None if node has the largest key in the tree
+        """
+        if node.right:
+            return self._min_node(node.right)
+        parent_node = node.parent
+        while parent_node and parent_node.right == node:
+            node = parent_node
+            parent_node = node.parent
+        return parent_node
+
+    def get_predecessor_node(self, node):
+        """
+        returns a node with the greatest key smaller than the key of the node
+        returns None if node has the smallest key in the tree
+        """
+        if node.left:
+            return self._max_node(node.left)
+        parent_node = node.parent
+        while parent_node and parent_node.left == node:
+            node = parent_node
+            parent_node = node.parent
+        return parent_node
