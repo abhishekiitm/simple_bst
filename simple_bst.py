@@ -47,7 +47,7 @@ class BST():
                 curr_node = curr_node.left
             else:
                 curr_node = stack.pop()
-                print(curr_node.key)
+                yield curr_node.key
                 curr_node = curr_node.right
             
     def find(self, key):
