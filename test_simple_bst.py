@@ -13,16 +13,13 @@ class TestSimpleBST(unittest.TestCase):
         with self.subTest():
             self.assertEqual(bst.root.key, key)
 
-    @unittest.skip("skip this test")
     def test_inorder_walk(self):
-        # bst.insert(14)
-        # bst.insert(4)
-        # bst.insert(7)
-        # bst.insert(1)
-        # bst.insert(10)
-        # bst.insert(6)
-        # bst.inorder_walk()
-        pass
+        bst = BST()
+        elems = [14, 4, 7, 1, 10, 6]
+        for elem in elems:
+            bst.insert(elem)
+        result = list(bst.inorder_walk())
+        self.assertListEqual(result, sorted(elems))
 
     def test_find(self):
         bst = BST()
