@@ -77,3 +77,17 @@ class BST():
         while curr_node.right:
             curr_node = curr_node.right
         return curr_node.key
+
+    def _min_node(self):
+        if self.is_empty(): return None
+        curr_node = self.root
+        while curr_node.left:
+            curr_node = curr_node.left
+        return curr_node
+
+    def _max_node(self):
+        if self.is_empty(): return None
+        curr_node = self.root
+        while curr_node.right:
+            curr_node = curr_node.right
+        return curr_node
