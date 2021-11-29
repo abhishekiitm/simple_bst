@@ -50,7 +50,7 @@ class BST():
                 yield curr_node.key
                 curr_node = curr_node.right
             
-    def find(self, key):
+    def get_node(self, key):
         curr_node = self.root
         while curr_node:
             if key == curr_node.key :
@@ -123,3 +123,28 @@ class BST():
             node = parent_node
             parent_node = node.parent
         return parent_node
+
+    def transplant(self, old_node, new_node):
+        if old_node.parent is None:
+            self.root = new_node
+        elif old_node == old_node.parent.left:
+            old_node.parent.left = new_node
+        else:
+            old_node.parent.right = new_node
+        if new_node:
+            new_node.parent = old_node.parent
+
+    def delete(self, node):
+        if node.left is None:
+            self.transplant(node, node.right)
+        elif node.right is None:
+            self.transplant(node, node.left)
+        else:
+            successor_node = self._min_node(node.right)
+            if successor_node.parent != node:
+                self.transplant(successor_node, successor_node.right)
+                successor_node.right = node.right
+                successor_node.right.parent = successor_node
+            self.transplant(node, successor_node)
+            successor_node.left = node.left
+            successor_node.left.parent = successor_node

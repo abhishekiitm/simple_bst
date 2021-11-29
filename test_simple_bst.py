@@ -28,9 +28,9 @@ class TestSimpleBST(unittest.TestCase):
         bst.insert(4)
         bst.insert(23)
         with self.subTest("check positive case"):
-            self.assertIsNotNone(bst.find(find_key))
+            self.assertIsNotNone(bst.get_node(find_key))
         with self.subTest("check negative case"):
-            self.assertIsNone(bst.find(10000))
+            self.assertIsNone(bst.get_node(10000))
 
     def test_is_empty(self):
         bst_empty = BST()
@@ -70,10 +70,10 @@ class TestSimpleBST(unittest.TestCase):
             bst.insert(elem)
         sorted_elems = sorted(elems)
         for idx in range(len(sorted_elems)-1):
-            node = bst.find(sorted_elems[idx])
+            node = bst.get_node(sorted_elems[idx])
             successor_node = bst.get_successor_node(node)
             self.assertEqual(sorted_elems[idx+1], successor_node.key)
-        node = bst.find(sorted_elems[-1])
+        node = bst.get_node(sorted_elems[-1])
         successor_node = bst.get_successor_node(node)
         self.assertIsNone(successor_node)
         
@@ -85,9 +85,23 @@ class TestSimpleBST(unittest.TestCase):
         sorted_elems = sorted(elems)
         sorted_elems.reverse()
         for idx in range(len(sorted_elems)-1):
-            node = bst.find(sorted_elems[idx])
+            node = bst.get_node(sorted_elems[idx])
             predecessor_node = bst.get_predecessor_node(node)
             self.assertEqual(sorted_elems[idx+1], predecessor_node.key)
-        node = bst.find(sorted_elems[-1])
+        node = bst.get_node(sorted_elems[-1])
         predecessor_node = bst.get_predecessor_node(node)
         self.assertIsNone(predecessor_node)
+
+    def test_delete(self):
+        bst = BST()
+        elems = [14, 4, 7, 1, 10, 6]
+        for elem in elems:
+            bst.insert(elem)
+
+        for elem in elems:
+            node = bst.get_node(elem)
+            bst.delete(node)
+            same_node = bst.get_node(elem)
+            with self.subTest(elem = elem):
+                self.assertIsNotNone(node)
+                self.assertIsNone(same_node)
