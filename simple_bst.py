@@ -6,6 +6,7 @@ class TreeNode():
         self.parent = parent
 
     def __repr__(self, level=0):
+        # TODO better tree printing
         ret = "\t"*level+repr(self.key)+"\n"
         for child in (self.left, self.right):
             if child is not None:
