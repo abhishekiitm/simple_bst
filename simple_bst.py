@@ -50,6 +50,21 @@ class BST():
                 curr_node = stack.pop()
                 yield curr_node.key
                 curr_node = curr_node.right
+
+    def preorder_walk(self):
+        if self.is_empty(): return None
+        curr_node = self.root
+
+        stack = []
+
+        while stack or curr_node:
+            if curr_node:
+                yield curr_node.key
+                stack.append(curr_node)
+                curr_node = curr_node.left
+            else:
+                curr_node = stack.pop()
+                curr_node = curr_node.right
             
     def get_node(self, key):
         curr_node = self.root
