@@ -30,6 +30,15 @@ class TestSimpleBST(unittest.TestCase):
         result = list(bst.preorder_walk())
         self.assertListEqual(result, expected_walk)
 
+    def test_postorder_walk(self):
+        bst = BST()
+        elems = [14, 4, 7, 1, 10, 6]
+        expected_walk = [1, 6, 10, 7, 4, 14]
+        for elem in elems:
+            bst.insert(elem)
+        result = list(bst.postorder_walk())
+        self.assertListEqual(result, expected_walk)
+
     def test_find(self):
         bst = BST()
         find_key = 14
