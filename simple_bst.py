@@ -1,3 +1,5 @@
+from collections import deque
+
 class TreeNode():
     def __init__(self, key, left=None, right=None, parent=None):
         self.key = key
@@ -71,7 +73,6 @@ class BST():
         curr_node = self.root
 
         stack = []
-        yield_stack = []
 
         while stack or curr_node:
             if curr_node:
@@ -85,6 +86,19 @@ class BST():
                     curr_node = None
                 else:
                     curr_node = curr_node.right
+
+    def levelorder_walk(self):
+        if self.is_empty(): return None
+        curr_node = self.root
+
+        q = deque()
+
+        while len(q) or curr_node:
+            yield curr_node.key
+            if curr_node.left: q.append(curr_node.left)
+            if curr_node.right: q.append(curr_node.right)
+            curr_node = q.popleft() if len(q) else None
+
             
     def get_node(self, key):
         curr_node = self.root
