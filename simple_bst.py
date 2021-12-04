@@ -217,3 +217,22 @@ class BST():
         # connect node and replace_node
         replace_node.left = node
         node.parent = replace_node
+
+    def rotate_right(self, node):
+        replace_node = node.left
+        # swap the appropriate child node
+        node.left = replace_node.right
+        if node.left: node.left.parent = node
+
+        # link the parents
+        replace_node.parent = node.parent
+        if node == self.root:
+            self.root = replace_node
+        elif node.parent.left == node:
+            node.parent.left = replace_node
+        else:
+            node.parent.right = replace_node
+
+        # connect node and replace_node
+        replace_node.right = node
+        node.parent = replace_node

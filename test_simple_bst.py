@@ -133,7 +133,7 @@ class TestSimpleBST(unittest.TestCase):
                 self.assertIsNotNone(node)
                 self.assertIsNone(same_node)
 
-    def test_rotate(self):
+    def test_rotate_left(self):
         bst = BST()
         elems = [14, 4, 7, 1, 10, 6]
         for elem in elems:
@@ -144,6 +144,21 @@ class TestSimpleBST(unittest.TestCase):
         rotate_elem = 4
         rotate_node = bst.get_node(rotate_elem)
         bst.rotate_left(rotate_node)
+        result = list(bst.postorder_walk())
+        with self.subTest(elem = rotate_elem):
+            self.assertListEqual(result, expected_walk)
+
+    def test_rotate_right(self):
+        bst = BST()
+        elems = [14, 4, 7, 1, 10, 6]
+        for elem in elems:
+            bst.insert(elem)
+
+        expected_walk = [1, 6, 10, 7, 14, 4]
+
+        rotate_elem = 14
+        rotate_node = bst.get_node(rotate_elem)
+        bst.rotate_right(rotate_node)
         result = list(bst.postorder_walk())
         with self.subTest(elem = rotate_elem):
             self.assertListEqual(result, expected_walk)
